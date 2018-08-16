@@ -35,4 +35,29 @@ const navBarHeight = statusBarHeight + titleBarHeight
 注：
 1. 在自定义导航栏的情况下，所有固定到顶部(`position: fixed`)的元素，都需要进行适配操作；
 
-2. 在自定义导航栏的情况下，`"enablePullDownRefresh": true` 时，小程序自带的下拉动画会从标题栏顶部开始出现，也就是用户需要下拉超过 `navBarHeight` 的高度才能看到对应的 Loading 动画，可以尝试自定义动画，用户下拉时能立刻看到对应的动画效果
+2. 在自定义导航栏的情况下，`"enablePullDownRefresh": true` 时，小程序自带的下拉动画会从标题栏顶部开始出现，也就是用户需要下拉超过 `navBarHeight` 的高度才能看到对应的 Loading 动画，可以尝试自定义动画，用户下拉时能立刻看到对应的动画效果；
+
+3. 自定义导航栏的情况下，通过 `wx.navigateTo()` 跳转的页面左上角没有返回图标，需要自定义设置。
+
+
+# 调试
+
+## 微信开发者工具
+
+在微信开发者工具中，app.js 的 `onShow` 函数中存在 `wx.navigateTo` 跳转页面时，无法跳转成功，但是 `wx.navigateTo` 的 `success` 回调会返回成功值，真机上则可以进行跳转。
+
+```js
+App({
+  onLaunch: function(options) {
+    // ...
+  },
+  onShow: function (options){
+    wx.navigateTo({
+      url: `/pages/index/index?userId=${userId}`,
+      success: res => {
+        // 跳转成功
+      }
+    })
+  },
+})
+```
