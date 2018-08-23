@@ -119,3 +119,19 @@ getCanvasTempFilePath("canvasId").then(res => {
   })
 }).catch(res => console.log(res))
 ```
+
+# API
+
+## 媒体
+
+#### wx.getImageInfo(OBJECT)
+
+[官方网站](https://developers.weixin.qq.com/miniprogram/dev/api/media-picture.html#wxgetimageinfoobject)
+
+**问题：**
+
+安卓手机(小米 8，华为 P10)，基础库版本 2.2.3，`src` 为相对文件路径时(`../../assets/background.png`)的情况下，此 API 会进入 `fail` 回调，返回信息为 `errMsg: "getImageInfo:fail file not found"`
+
+iPhone 无此问题
+
+**解决方案：** 直接使用相对路径
