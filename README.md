@@ -135,3 +135,27 @@ getCanvasTempFilePath("canvasId").then(res => {
 iPhone 无此问题
 
 **解决方案：** 直接使用相对路径
+
+
+# WXML
+
+## data
+
+在 WXML 中 以 `data-` 开头的自定义的数据会在事件的回调中会通过 `e.currentTarget.dataset` 获取到；
+
+书写方式： 以 `data-` 开头，多个单词由连字符 `-` 链接，不能有大写(大写会自动转成小写)如 `data-element-type`，最终在 `event.currentTarget.dataset` 中会将连字符转成驼峰`elementType`
+
+示例：
+
+```html
+<view data-alpha-beta="1" data-alphaBeta="2" bindtap="bindViewTap"> DataSet Test </view>
+```
+
+```js
+Page({
+  bindViewTap:function(event){
+    event.currentTarget.dataset.alphaBeta === 1 // - 会转为驼峰写法
+    event.currentTarget.dataset.alphabeta === 2 // 大写会转为小写
+  }
+})
+```
